@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Test from "./Test.js";
+import Qr from "./Qr.js";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Test />
+    <h1>Bienvenue sur notre jeu</h1>
+    <Qr />
   </React.StrictMode>
 );
