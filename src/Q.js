@@ -7,7 +7,7 @@ const TableHeader = () => {
   );
 };
 
-class Q extends Component {
+class question extends Component {
   render() {
     return (
       <div>
@@ -17,7 +17,7 @@ class Q extends Component {
   }
 }
 
-export default Q;
+export default question;
 
 // const TableBody = () => {
 //   return (
