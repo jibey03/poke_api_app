@@ -7,6 +7,16 @@ const TableHeader = () => {
   );
 };
 
+class Q extends Component {
+  render() {
+    return (
+      <div>
+        <TableHeader />
+      </div>
+    );
+  }
+}
+
 export default Q;
 
 // const TableBody = () => {

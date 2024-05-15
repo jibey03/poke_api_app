@@ -8,5 +8,17 @@ const TableHeader = () => {
   );
 };
 
+class R extends Component {
+  render() {
+    return (
+      <div>
+        <TableHeader />
+        <R_son />
+      </div>
+    );
+  }
+}
+
 <R_son />;
+
 export default R;
