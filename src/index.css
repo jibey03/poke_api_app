@@ -2,3 +2,29 @@ body,
 head {
   font-family: Inter;
 }
+
+@import url("https://fonts.cdnfonts.com/css/pokemon-solid");
+
+h1 {
+  font-size: 50px;
+  background: -webkit-linear-gradient(left, blue, yellow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Pokemon Solid", sans-serif;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h4 {
+  font-weight: 400;
+}
+
+td {
+  font-weight: 400;
+}
+
+table {
+  border-spacing: 60px 5px;
+}
