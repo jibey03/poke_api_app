@@ -6,7 +6,11 @@ import "./index.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <h1>Bienvenue sur Poke API</h1>
+    <header>
+      <h1>Bienvenue sur Poke API</h1>
+    </header>
+    <main>
     <Qr />
+    </main>
   </React.StrictMode>
 );

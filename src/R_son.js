@@ -5,15 +5,26 @@ import React, { Component } from "react";
 // };
 
 class R_son extends Component {
+  state = {
+    data: [],
+  };
+  componentDidMount() {
+    let url = "https://pokeapi.co/api/v2/pokemon/gengar";
+    fetch(url)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({
+          data: result,
+        });
+      });
+  }
   render() {
-    const dataToPass = [];
+    const { data } = this.state;
     return (
-      <div>
-        <h4>Réponse 1</h4>
-        <h4>Réponse 2</h4>
-        <h4>Réponse 3</h4>
-        <h4>Réponse 4</h4>
-      </div>
+      <button class="reponse">
+        <img src={data.sprites?.front_default}></img>
+        <p class="nom-pokemon">{data.name}</p>
+      </button>
     );
   }
 }

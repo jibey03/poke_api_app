@@ -41,14 +41,13 @@ class Qr extends Component {
           tableContent={dataToPass}
           removeRow={this.removeRow}
         />
-        <h1></h1>
         {/* <Q
           tableName={tableTitle2}
           tableContent={dataToPass}
           removeRow={this.removeRow}
         /> */}
 
-        <h1></h1>
+        <h2> </h2>
 
         <PokeApi />
 

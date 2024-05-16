@@ -18,30 +18,32 @@ class PokeApi extends Component {
     const { data } = this.state;
     return (
       <div class="pokemon">
-        <h1>Pokemon</h1>
-        <img src={data.sprites?.front_default}></img>
-        <table>
-          <thead>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Height</th>
-            <th>Weight</th>
-            <th>Types</th>
-          </thead>
-          <td>{data.id}</td>
-          <td>{data.name}</td>
-          <td>{data.height}</td>
-          <td>{data.weight}</td>
-          <td>
-            {data.types &&
-              data.types.map((typeInfo, index) => (
-                <span key={index}>
-                  {typeInfo.type.name}
-                  {index < data.types.length - 1 ? ", " : ""}
-                </span>
-              ))}
-          </td>
-        </table>
+        <h2>Quelle est l'évolution de ce Pokémon ?</h2>
+          <div class="poke-info">
+          <img src={data.sprites?.front_default}></img>
+          <table>
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Types</th>
+            </thead>
+            <td>{data.id}</td>
+            <td>{data.name}</td>
+            <td>{data.height}</td>
+            <td>{data.weight}</td>
+            <td>
+              {data.types &&
+                data.types.map((typeInfo, index) => (
+                  <span key={index}>
+                    {typeInfo.type.name}
+                    {index < data.types.length - 1 ? ", " : ""}
+                  </span>
+                ))}
+            </td>
+          </table>
+        </div>
       </div>
     );
   }
