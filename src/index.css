@@ -20,6 +20,7 @@ padding-bottom: 15px;
 border-image: url(../images/frame-hd.png) 42 round;
 border-style: solid;
 border-width: 21px;
+color: white;
 }
 
 main{margin-left:10vw;
@@ -33,9 +34,10 @@ main{margin-left:10vw;
 
 h1 {
   font-size: 50px;
-  background: -webkit-linear-gradient(top, white, blue);
+  color: white;
+  /* background: -webkit-linear-gradient(top, white, blue);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
   font-family: "Pokemon Solid", sans-serif;
   line-height: 80px;
   margin: 0;

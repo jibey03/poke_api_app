@@ -5,7 +5,7 @@ class PokeApi extends Component {
     data: [],
   };
   componentDidMount() {
-    let url = "https://pokeapi.co/api/v2/pokemon/snorlax";
+    let url = "https://pokeapi.co/api/v2/pokemon/lugia";
     fetch(url)
       .then((result) => result.json())
       .then((result) => {
