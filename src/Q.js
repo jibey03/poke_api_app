@@ -1,68 +1,105 @@
 import React, { Component } from "react";
 
-const TableHeader = (props) => {
-  return (
-    <thead>
-      <th>{props.tableName}</th>
-      <th>Nom</th>
-      <th>Types</th>
-    </thead>
-  );
-};
+// class Question extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       pokemon: null,
+//       error: null,
+//     };
+//   }
 
-const TableBody = (props) => {
-  const rows = props.tableContent.map((row, index) => {
-    return (
-      <tr key={index}>
-        <td>{row.numero}</td>
-        <td>{row.nom}</td>
-        <td>{row.type}</td>
-        <td>
-          <button onClick={() => props.removeRow(index)}>
-            Supprimer ligne
-          </button>
-        </td>
-      </tr>
-    );
-  });
-  return <tbody>{rows}</tbody>;
+//   componentDidMount() {
+//     this.fetchRandomPokemon();
+//   }
 
-  // return (
-  //   <tbody>
-  //     <tr>
-  //       <td>dfdsfsfs</td>
-  //       <td>klsndlksndlA</td>
-  //       <td>sdklsdlAA</td>
-  //     </tr>
-  //     <tr>
-  //       <td>sadsd2</td>
-  //       <td>sadsadB</td>
-  //       <td>sfqfBB</td>
-  //     </tr>
-  //     <tr>
-  //       <td>sdqd3</td>
-  //       <td>azdddsC</td>
-  //       <td>sqdqsdCC</td>
-  //     </tr>
-  //   </tbody>
-  // );
-};
+//   fetchRandomPokemon = () => {
+//     const { pokeIds } = this.props;
+//     if (!pokeIds || pokeIds.length === 0) {
+//       this.setState({ error: new Error("No Pokémon IDs provided") });
+//       return;
+//     }
 
-class Q extends Component {
+//     const randomId = Math.floor(Math.random() * pokeIds.length);
+
+//     fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error("Network response was not ok");
+//         }
+//         return response.json();
+//       })
+//       .then((data) => this.setState({ pokemon: data }))
+//       .catch((error) => this.setState({ error }));
+//   };
+
+//   render() {
+//     const { pokemon, error } = this.state;
+
+//     return (
+//       <div class="pokemon">
+//         {error && <p>Error: {error.message}</p>}
+//         {pokemon ? (
+//           <div>
+//             <img src={pokemon.sprites.front_default} alt={pokemon.id} />
+//             <h2>{pokemon.name}</h2>
+//           </div>
+//         ) : (
+//           <p>Loading...</p>
+//         )}
+//       </div>
+//     );
+//   }
+// }
+
+
+class Question extends Component {
+  state = {
+    data: [],
+  };
+  componentDidMount() {
+    let url = "https://pokeapi.co/api/v2/pokemon/lugia";
+    fetch(url)
+      .then((result) => result.json())
+      .then((result) => {
+        this.setState({
+          data: result,
+        });
+      });
+  }
   render() {
-    const { tableContent, removeRow } = this.props;
-    const { tableName } = this.props;
+    const { data } = this.state;
     return (
-      // <div>
-      //   <h2>Retrouvez le Pokemon</h2>
-      //   {/* appeler API */}
-      // </div>
-      <table>
-        <TableHeader tableName={tableName} />
-        <TableBody tableContent={tableContent} removeRow={removeRow} />
-      </table>
+      <div class="pokemon">
+        <h2>Quelle est l'évolution de ce Pokémon ?</h2>
+          <div class="poke-info">
+          <img src={data.sprites?.front_default}></img>
+          <table>
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Types</th>
+            </thead>
+            <td>{data.id}</td>
+            <td>{data.name}</td>
+            <td>{data.height}</td>
+            <td>{data.weight}</td>
+            <td>
+              {data.types &&
+                data.types.map((typeInfo, index) => (
+                  <span key={index}>
+                    {typeInfo.type.name}
+                    {index < data.types.length - 1 ? ", " : ""}
+                  </span>
+                ))}
+            </td>
+          </table>
+        </div>
+      </div>
     );
   }
 }
 
-export default Q;
+export default Question;
