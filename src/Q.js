@@ -41,7 +41,6 @@ class Question extends Component {
         <h2>Trouve ce Pokémon :</h2>
         {pokemon ? (
           <>
-            <h2>{pokemon.name}</h2>
             <div className="poke-info">
               <table>
                 <thead>
