@@ -8,7 +8,6 @@ class Reponse extends Component {
   render() {
     return (
       <div class="section-reponses">
-        <h3>Votre choix :</h3>
         {pokeIds.map((id, index) => (
           <Reponse_son key={index} pokeId={id} />
         ))}
