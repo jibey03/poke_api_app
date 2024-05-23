@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Reponse_son from "./R_son.js";
 import { randomGenPoke } from "./utils.js";
 
+export const pokeIds = Array.from({ length: 4 }, () => randomGenPoke());
 
 class Reponse extends Component {
   render() {
-    const pokeIds = Array.from({ length: 4 }, () => randomGenPoke());
     return (
       <div class="section-reponses">
         <h3>Votre choix :</h3>
@@ -16,6 +16,5 @@ class Reponse extends Component {
     );
   }
 }
-
 
 export default Reponse;

@@ -1,102 +1,79 @@
 import React, { Component } from "react";
-
-// class Question extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       pokemon: null,
-//       error: null,
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.fetchRandomPokemon();
-//   }
-
-//   fetchRandomPokemon = () => {
-//     const { pokeIds } = this.props;
-//     if (!pokeIds || pokeIds.length === 0) {
-//       this.setState({ error: new Error("No Pokémon IDs provided") });
-//       return;
-//     }
-
-//     const randomId = Math.floor(Math.random() * pokeIds.length);
-
-//     fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => this.setState({ pokemon: data }))
-//       .catch((error) => this.setState({ error }));
-//   };
-
-//   render() {
-//     const { pokemon, error } = this.state;
-
-//     return (
-//       <div class="pokemon">
-//         {error && <p>Error: {error.message}</p>}
-//         {pokemon ? (
-//           <div>
-//             <img src={pokemon.sprites.front_default} alt={pokemon.id} />
-//             <h2>{pokemon.name}</h2>
-//           </div>
-//         ) : (
-//           <p>Loading...</p>
-//         )}
-//       </div>
-//     );
-//   }
-// }
-
+import { pokeIds } from "./R";
 
 class Question extends Component {
-  state = {
-    data: [],
-  };
-  componentDidMount() {
-    let url = "https://pokeapi.co/api/v2/pokemon/lugia";
-    fetch(url)
-      .then((result) => result.json())
-      .then((result) => {
-        this.setState({
-          data: result,
-        });
-      });
+  constructor(props) {
+    super(props);
+    this.state = {
+      pokemon: null,
+      error: null,
+    };
   }
+
+  componentDidMount() {
+    this.fetchRamdomPokemon();
+  }
+
+  fetchRamdomPokemon = () => {
+    const { pokeIds } = this.props;
+    if (!pokeIds || pokeIds.length === 0) {
+      this.setState({ error: new Error("No Pokémon IDs provided") });
+      return;
+    }
+    const randomIndex = Math.floor(Math.random() * pokeIds.length);
+    const randomPokeId = pokeIds[randomIndex];
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokeId}`)
+      .then((result) => {
+        if (!result.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return result.json();
+      })
+      .then((data) => this.setState({ pokemon: data }))
+      .catch((error) => this.setState({ error }));
+  };
+
   render() {
-    const { data } = this.state;
+    const { pokemon, error } = this.state;
     return (
-      <div class="pokemon">
-        <h2>Quelle est l'évolution de ce Pokémon ?</h2>
-          <div class="poke-info">
-          <img src={data.sprites?.front_default}></img>
-          <table>
-            <thead>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Height</th>
-              <th>Weight</th>
-              <th>Types</th>
-            </thead>
-            <td>{data.id}</td>
-            <td>{data.name}</td>
-            <td>{data.height}</td>
-            <td>{data.weight}</td>
-            <td>
-              {data.types &&
-                data.types.map((typeInfo, index) => (
-                  <span key={index}>
-                    {typeInfo.type.name}
-                    {index < data.types.length - 1 ? ", " : ""}
-                  </span>
-                ))}
-            </td>
-          </table>
-        </div>
+      <div className="pokemon">
+        <h2>Trouve ce Pokémon :</h2>
+        {pokemon ? (
+          <>
+            <h2>{pokemon.name}</h2>
+            <div className="poke-info">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Types</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{pokemon.id}</td>
+                    <td>{pokemon.name}</td>
+                    <td>
+                      {pokemon.types &&
+                        pokemon.types.map((typeInfo, index) => (
+                          <span key={index}>
+                            {typeInfo.type.name}
+                            {index < pokemon.types.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : error ? (
+          <p>{error.message}</p>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     );
   }
