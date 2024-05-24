@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-import R_son from "./R_son.js";
+import Reponse_son from "./R_son.js";
+import { randomGenPoke } from "./utils.js";
 
-const TableHeader = () => {
-  return (
-    <h1>Retrouvez :</h1>
-    // appel Api
-  );
-};
+export const pokeIds = Array.from({ length: 4 }, () => randomGenPoke());
 
-<R_son />;
-export default R;
+class Reponse extends Component {
+  render() {
+    return (
+      <div class="section-reponses">
+        {pokeIds.map((id, index) => (
+          <Reponse_son key={index} pokeId={id} />
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Reponse;

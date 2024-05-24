@@ -1,17 +1,48 @@
 import React, { Component } from "react";
 
-const TableHeader = () => {
-  return <div></div>;
-};
+class Reponse_son extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pokemon: null,
+      error: null,
+    };
+  }
 
-class R_son extends Component{
-    render(){
-        const dataToPass = []
-    }
-    return(
-        <div>
-            
-    )
+  componentDidMount() {
+    this.fetchPokemon(this.props.pokeId);
+  }
+
+  fetchPokemon = (pokeId) => {
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokeId}`;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => this.setState({ pokemon: data }))
+      .catch((error) => this.setState({ error }));
+  };
+
+  render() {
+    const { pokemon, error } = this.state;
+
+    return (
+      <div>
+        {error && <p>Error: {error.message}</p>}
+        {pokemon ? (
+          <button class="reponse">
+            <img src={pokemon.sprites.front_default} alt={pokemon.id} />
+          </button>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    );
+  }
 }
 
-export default R_son;
+export default Reponse_son;

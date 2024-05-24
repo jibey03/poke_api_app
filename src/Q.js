@@ -1,43 +1,80 @@
 import React, { Component } from "react";
 
-const TableHeader = () => {
-  return (
-    <h1>Retrouvez :</h1>
-    // appel Api
-  );
-};
+class Question extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pokemon: null,
+      error: null,
+    };
+  }
 
-export default Q;
+  componentDidMount() {
+    this.fetchRamdomPokemon();
+  }
 
-// const TableBody = () => {
-//   return (
-//     <tbody>
-//       <tr>
-//         <th>1</th>
-//         <th>A</th>
-//         <th>AA</th>
-//       </tr>
-//       <tr>
-//         <th>2</th>
-//         <th>B</th>
-//         <th>BB</th>
-//       </tr>
-//       <tr>
-//         <th>3</th>
-//         <th>C</th>
-//         <th>CC</th>
-//       </tr>
-//     </tbody>
-//   );
-// };
+  fetchRamdomPokemon = () => {
+    const { pokeIds } = this.props;
+    if (!pokeIds || pokeIds.length === 0) {
+      this.setState({ error: new Error("No Pokémon IDs provided") });
+      return;
+    }
+    const randomIndex = Math.floor(Math.random() * pokeIds.length);
+    const randomPokeId = pokeIds[randomIndex];
 
-// class Table extends Component {
-//   render() {
-//     return (
-//       <table>
-//         <TableHeader />
-//         <TableBody />
-//       </table>
-//     );
-//   }
-// }
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokeId}`)
+      .then((result) => {
+        if (!result.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return result.json();
+      })
+      .then((data) => this.setState({ pokemon: data }))
+      .catch((error) => this.setState({ error }));
+  };
+
+  render() {
+    const { pokemon, error } = this.state;
+    return (
+      <div className="pokemon">
+        <h2>Trouve ce Pokémon :</h2>
+        {pokemon ? (
+          <>
+            <div className="poke-info">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Types</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{pokemon.id}</td>
+                    <td>{pokemon.name}</td>
+                    <td>
+                      {pokemon.types &&
+                        pokemon.types.map((typeInfo, index) => (
+                          <span key={index}>
+                            {typeInfo.type.name}
+                            {index < pokemon.types.length - 1 ? ", " : ""}
+                          </span>
+                        ))}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : error ? (
+          <p>{error.message}</p>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    );
+  }
+}
+
+export default Question;

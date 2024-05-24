@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import Q from "./Q.js";
-import R from "./R.js";
+import Question from "./Q.js";
+import Reponse, { pokeIds } from "./R.js";
 
-class Qr extends Component {
+class Quizz extends Component {
   render() {
     return (
       <div>
-        <h1>Retrouvez :</h1>
-
-        <Q />
-        <R />
+        <h1>Quizz</h1>
+        <Question pokeIds={pokeIds} />
+        <Reponse />
       </div>
     );
   }
 }
 
-export default Qr;
+export default Quizz;
