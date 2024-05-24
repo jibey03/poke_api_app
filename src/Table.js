@@ -4,7 +4,6 @@ const TableHeader = (props) => {
   return (
     <thead>
       <th>{props.tableName}</th>
-      <th>Image</th>
       <th>Nom</th>
       <th>Types</th>
     </thead>
@@ -16,7 +15,6 @@ const TableBody = (props) => {
     return (
       <tr key={index}>
         <td>{row.numero}</td>
-        <td>{row.image}</td>
         <td>{row.nom}</td>
         <td>{row.type}</td>
         <td>
