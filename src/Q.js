@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { translatePokemonName } from "./openapi";
 
 class Question extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pokemon: null,
+      translatedName: null,
       error: null,
     };
   }
@@ -29,12 +31,16 @@ class Question extends Component {
         }
         return result.json();
       })
-      .then((data) => this.setState({ pokemon: data }))
+      .then((data) => {
+        this.setState({ pokemon: data });
+        return translatePokemonName(data.name);
+      })
+      .then((translatedName) => this.setState({ translatedName }))
       .catch((error) => this.setState({ error }));
   };
 
   render() {
-    const { pokemon, error } = this.state;
+    const { pokemon, translatedName, error } = this.state;
     return (
       <div className="pokemon">
         <h2>Trouve ce Pokémon :</h2>
@@ -46,6 +52,7 @@ class Question extends Component {
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Translated Name</th>
                     <th>Types</th>
                   </tr>
                 </thead>
@@ -53,6 +60,7 @@ class Question extends Component {
                   <tr>
                     <td>{pokemon.id}</td>
                     <td>{pokemon.name}</td>
+                    <td>{translatedName || "Translating..."}</td>
                     <td>
                       {pokemon.types &&
                         pokemon.types.map((typeInfo, index) => (
