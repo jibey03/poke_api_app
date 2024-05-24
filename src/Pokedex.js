@@ -1,58 +1,53 @@
 import React, { Component } from "react";
-import Table from "./Table.js";
-
-// FAIRE UN POKEDEX FAISANT APPEL À L'API
+import axios from "axios";
+import Table from "./Table";
 
 class Pokedex extends Component {
   state = {
-    dataToPass: [
-      { numero: "0001", nom: "Bulbizarre", type: "Plante, Poison" },
-      { numero: "0002", nom: "Herbizarre", type: "Plante, Poison" },
-      { numero: "0003", nom: "Florizarre", type: "Plante, Poison" },
-      { numero: "0004", nom: "Salamèche", type: "Feu" },
-      { numero: "0005", nom: "Reptincel", type: "Feu" },
-      { numero: "0006", nom: "Dracaufeu", type: "Feu, Vol" },
-      { numero: "0007", nom: "Carapuce", type: "Eau" },
-      { numero: "0008", nom: "Carabaffe", type: "Eau" },
-      { numero: "0009", nom: "Tortank", type: "Eau" },
-      { numero: "0001", nom: "Bulbizarre", type: "Plante, Poison" },
-      { numero: "0002", nom: "Herbizarre", type: "Plante, Poison" },
-      { numero: "0003", nom: "Florizarre", type: "Plante, Poison" },
-      { numero: "0004", nom: "Salamèche", type: "Feu" },
-      { numero: "0005", nom: "Reptincel", type: "Feu" },
-      { numero: "0006", nom: "Dracaufeu", type: "Feu, Vol" },
-      { numero: "0007", nom: "Carapuce", type: "Eau" },
-      { numero: "0008", nom: "Carabaffe", type: "Eau" },
-      { numero: "0009", nom: "Tortank", type: "Eau" },
-      { numero: "0001", nom: "Bulbizarre", type: "Plante, Poison" },
-      { numero: "0002", nom: "Herbizarre", type: "Plante, Poison" },
-      { numero: "0003", nom: "Florizarre", type: "Plante, Poison" },
-      { numero: "0004", nom: "Salamèche", type: "Feu" },
-      { numero: "0005", nom: "Reptincel", type: "Feu" },
-      { numero: "0006", nom: "Dracaufeu", type: "Feu, Vol" },
-      { numero: "0007", nom: "Carapuce", type: "Eau" },
-      { numero: "0008", nom: "Carabaffe", type: "Eau" },
-      { numero: "0009", nom: "Tortank", type: "Eau" },
-      { numero: "0001", nom: "Bulbizarre", type: "Plante, Poison" },
-      { numero: "0002", nom: "Herbizarre", type: "Plante, Poison" },
-      { numero: "0003", nom: "Florizarre", type: "Plante, Poison" },
-      { numero: "0004", nom: "Salamèche", type: "Feu" },
-      { numero: "0005", nom: "Reptincel", type: "Feu" },
-      { numero: "0006", nom: "Dracaufeu", type: "Feu, Vol" },
-      { numero: "0007", nom: "Carapuce", type: "Eau" },
-      { numero: "0008", nom: "Carabaffe", type: "Eau" },
-      { numero: "0009", nom: "Tortank", type: "Eau" },
-    ],
-    searchQuery:"",
+    dataToPass: [],
+    searchQuery: "",
+  };
+
+  componentDidMount() {
+    this.fetchPokemonData();
+  }
+
+  fetchPokemonData = async () => {
+    try {
+      const response = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=1025"
+      );
+      const pokemonList = response.data.results;
+
+      const detailedDataPromises = pokemonList.map((pokemon) =>
+        axios.get(pokemon.url)
+      );
+
+      const detailedDataResponses = await Promise.all(detailedDataPromises);
+
+      const pokemonData = detailedDataResponses.map((response) => {
+        const { id, name, types } = response.data;
+        return {
+          numero: String(id).padStart(4, "0"),
+          nom: name.charAt(0).toUpperCase() + name.slice(1),
+          type: types.map((typeInfo) => typeInfo.type.name).join(", "),
+        };
+      });
+
+      this.setState({ dataToPass: pokemonData });
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des données Pokémon :",
+        error
+      );
+    }
   };
 
   removeRow = (index) => {
     const { dataToPass } = this.state;
 
     this.setState({
-      dataToPass: dataToPass.filter((currentData, i) => {
-        return i !== index;
-      }),
+      dataToPass: dataToPass.filter((_, i) => i !== index),
     });
   };
 
@@ -82,26 +77,25 @@ class Pokedex extends Component {
     const tableTitle2 = "NUM POKE";
     return (
       <div>
-        <div class="pokedex-top">
+        <div className="pokedex-top">
           <h1>Pokedex</h1>
-          <div class="search-bar">
-            <input 
-            id="mySearch"
-            type="text"
-            onKeyUp={this.searchFunction}
-            placeholder="Search..."
-            autocomplete="off"
+          <div className="search-bar">
+            <input
+              id="mySearch"
+              type="text"
+              onKeyUp={this.searchFunction}
+              placeholder="Search..."
+              autoComplete="off"
             />
           </div>
         </div>
-        <div class="pokedex-list">
+        <div className="pokedex-list">
           <Table
             tableName={tableTitle1}
             tableContent={filteredData}
             removeRow={this.removeRow}
           />
         </div>
-
       </div>
     );
   }
