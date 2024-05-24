@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { pokeIds } from "./R";
 
 class Question extends Component {
   constructor(props) {

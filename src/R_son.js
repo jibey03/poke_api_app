@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { randomGenPoke } from "./utils.js";
-import { randomToFind } from "./utils.js";
 
 class Reponse_son extends Component {
   constructor(props) {
