@@ -83,7 +83,7 @@ class Question extends Component {
                   </tr>
                 </tbody>
               </table>
-              <button onClick={this.handleAnswer} disabled={!selectedAnswer}>Valider la réponse</button>
+              <button onClick={this.handleAnswer} disabled={!selectedAnswer}>Suivant</button>
             </div>
           </>
         ) : error ? (
