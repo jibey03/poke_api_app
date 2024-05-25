@@ -69,9 +69,9 @@ class Question extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{pokemon.id}</td>
-                    <td>{pokemon.name}</td>
-                    <td>
+                    <td data-label="ID">{pokemon.id}</td>
+                    <td data-label="Name">{pokemon.name}</td>
+                    <td data-label="Types">
                       {pokemon.types &&
                         pokemon.types.map((typeInfo, index) => (
                           <span key={index}>
@@ -83,8 +83,8 @@ class Question extends Component {
                   </tr>
                 </tbody>
               </table>
+              </div>
               <button onClick={this.handleAnswer} disabled={!selectedAnswer}>Suivant</button>
-            </div>
           </>
         ) : error ? (
           <p>{error.message}</p>
