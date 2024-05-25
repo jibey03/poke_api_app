@@ -14,9 +14,9 @@ const AnswerSummary = ({ userAnswers, correctAnswers }) => {
                     alt={answer.correctAnswer.name} 
                     />
                     <br/>
-                    Votre réponse: {answer.answer.name.charAt(0).toUpperCase() + answer.answer.name.slice(1)}
-                    <br />
                     Réponse correcte: {answer.correctAnswer.name.charAt(0).toUpperCase() + answer.correctAnswer.name.slice(1)}
+                    <br />
+                    Votre réponse: {answer.answer.name.charAt(0).toUpperCase() + answer.answer.name.slice(1)}
                 </li>
                 ))}
             </ul>
