@@ -27,7 +27,7 @@ border-width: 21px; */
   top: 0;
   width: 100%;
   z-index: 999;
-  max-height: 70px;
+  height: 70px;
 }
 
 main{margin-left:10vw;
