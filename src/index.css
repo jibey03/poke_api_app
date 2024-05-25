@@ -269,7 +269,7 @@ input[type="text"] {
   justify-items: center;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1100px){
   .section-reponses{
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 50px 100px;
@@ -309,7 +309,7 @@ input[type="text"] {
 }
 
 .reponse img{border: none;
-width: 100px;
+width: 125px;
 padding: 0;}
 
 .reponse img:hover{transform: scale(1.3);
