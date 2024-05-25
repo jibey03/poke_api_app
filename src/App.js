@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <header>
+        <header class="header">
         <nav>
           <ul>
             <li>
