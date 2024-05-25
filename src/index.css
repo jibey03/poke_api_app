@@ -15,13 +15,12 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-header {
-  background-color: black;
-  /* margin: 0px 25vw 0px 25vw; */
-  text-align: center;
-  /* padding-bottom: 15px; */
-  /* border-image: url(../images/frame-hd.png) 42 round; */
-  /* border-style: solid;
+header{background-color: #79C9F9;
+/* margin: 0px 25vw 0px 25vw; */
+text-align: center;
+/* padding-bottom: 15px; */
+/* border-image: url(../images/frame-hd.png) 42 round; */
+/* border-style: solid;
 border-width: 21px; */
   color: white;
   position: fixed;
@@ -31,16 +30,34 @@ border-width: 21px; */
   max-height: 70px;
 }
 
-main {
-  margin-left: 10vw;
-  margin-right: 10vw;
-  margin-top: 100px;
-}
+main{margin-left:10vw;
+  margin-right:10vw;
+  margin-top: 100px;}
+  
+
+/* HEADER */
+.header ul{list-style-type: none;
+  margin: 0 20px 0 20px;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;}
+  
+.header li{display: inline;
+  float: left;
+  padding: 0px 15px 0px 15px;
+  height: 70px;}
+  
+  
 
 /* TYPOGRAPHIE, IMAGES, BOUTONS */
 
 h1 {
   font-size: 50px;
+  line-height: 58px;
   color: white;
   /* background: -webkit-linear-gradient(top, white, blue);
   -webkit-background-clip: text;
@@ -55,48 +72,31 @@ h1 {
 
 h2 {
   font-size: 32px;
+  line-height: 40px;
 }
 
 h3 {
   font-size: 26px;
+  line-height: 30px;
 }
 
 h4 {
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bolder;
 }
 
 nav {
   height: 50px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 70px;
-  margin-left: 20px;
-}
 
-li {
-  display: inline;
-  float: none;
-  padding: 0px 15px 0px 15px;
-  height: 70px;
-}
-
-a,
-a:visited {
-  text-decoration: none;
-  font-family: "Pokemon Solid", sans-serif;
-  letter-spacing: 2px;
-  color: white;
-  font-size: 22px;
-  padding: 0px 30px 7px 30px;
-}
+a, a:visited{text-decoration: none;
+font-family: "Pokemon Solid", sans-serif;
+letter-spacing: 2px;
+color: white;
+font-size: 22px;
+padding: 0px 30px 7px 30px;}
 
 a:hover {
   background-color: rgba(255, 255, 255, 0.3);
@@ -205,22 +205,28 @@ input[type="text"] {
   border-radius: 15px;
 }
 
-.poke-info {
-  display: flex;
+.poke-info{display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
-}
+  padding-bottom: 20px;}
 
-@media screen and (max-width: 768px) {
-  .poke-info table thead,
-  .poke-info table tbody,
-  .poke-info table td,
-  .poke-info table tr,
-  .poke-info table th {
-    display: block;
-  }
+.poke-info table, .poke-info table thead, .poke-info table tbody{text-align: center;}
+
+@media screen and (max-width: 850px){
+  .pokemon{margin: 0px;}
+
+  .poke-info table, .poke-info table thead, .poke-info table tbody{width: 100%;}
+
+  .poke-info table thead {
+    display: none;
+    }
+
+  .poke-info table{margin: 0;}
+    
+  .poke-info table tbody, .poke-info table td, .poke-info table tr, .poke-info table th{
+    display: block;}
 
   .poke-info table tr {
     margin-bottom: 15px;
@@ -228,8 +234,8 @@ input[type="text"] {
 
   .poke-info table td {
     text-align: right;
-    padding-left: 50%;
     position: relative;
+    text-transform: capitalize;
   }
 
   .poke-info table td::before {
@@ -237,21 +243,43 @@ input[type="text"] {
     position: absolute;
     left: 0;
     width: 50%;
-    padding-left: 15px;
     font-weight: bold;
     text-align: left;
   }
+
+
 }
 
 /* R */
 
-.section-reponses {
+/* .section-reponses{
   display: flex;
   flex-direction: row;
   gap: 15px;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 50px 100px;
+} */
+
+.section-reponses{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  padding: 50px 100px;
+  justify-items: center;
+}
+
+@media screen and (max-width: 1000px){
+  .section-reponses{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 50px 100px;
+  }
+}
+
+@media screen and (max-width: 850px){
+  .section-reponses{
+    padding: 50px;
+  }
 }
 
 /* R_SON */
@@ -280,13 +308,39 @@ input[type="text"] {
   margin-top: 0;
 }
 
-.reponse img {
-  border: none;
-  width: 100px;
-  padding: 0;
-}
+.reponse img{border: none;
+width: 100px;
+padding: 0;}
 
-.reponse img:hover {
-  transform: scale(1.3);
-  transition: 0.5s;
-}
+.reponse img:hover{transform: scale(1.3);
+transition: 0.5s;}
+
+.reponse-selectionnee{background-color: rgba(0, 0, 0, 0.7);
+  color: white;}
+
+
+
+/* ANSWERSUMMARY */
+
+.recap-reponses{ background-color: rgba(255, 255, 255, 0.5);
+border-radius: 20px;
+padding: 20px;
+margin-top: 20px;
+text-align: center;}
+
+.recap-reponses ul{list-style-type: none;
+display: flex;
+flex-wrap: wrap;
+gap: 20px 70px;
+justify-content: flex-start;}
+
+.recap-questions{text-align: left;}
+
+.recap-questions li{font-size: 14px;}
+
+.recap-questions img{max-width: 80px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+padding: 0;}

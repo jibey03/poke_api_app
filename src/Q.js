@@ -10,10 +10,16 @@ class Question extends Component {
   }
 
   componentDidMount() {
-    this.fetchRamdomPokemon();
+    this.fetchRandomPokemon();
   }
 
-  fetchRamdomPokemon = () => {
+  componentDidUpdate(prevProps) {
+    if (prevProps.pokeIds !== this.props.pokeIds) {
+      this.fetchRandomPokemon();
+    }
+  }
+
+  fetchRandomPokemon = () => {
     const { pokeIds } = this.props;
     if (!pokeIds || pokeIds.length === 0) {
       this.setState({ error: new Error("No Pokémon IDs provided") });
@@ -33,8 +39,20 @@ class Question extends Component {
       .catch((error) => this.setState({ error }));
   };
 
+  handleAnswer = () => {
+    const { pokemon } = this.state;
+    const { selectedAnswer, updateScore, nextQuestion, handleAnswer } = this.props;
+  
+    if (selectedAnswer && selectedAnswer.id === pokemon.id) {
+      updateScore();
+    }
+    handleAnswer(selectedAnswer, pokemon);
+    nextQuestion();
+  };
+  
   render() {
     const { pokemon, error } = this.state;
+    const { selectedAnswer } = this.props;
     return (
       <div className="pokemon">
         <h2>Trouve ce Pokémon :</h2>
@@ -51,9 +69,9 @@ class Question extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{pokemon.id}</td>
-                    <td>{pokemon.name}</td>
-                    <td>
+                    <td data-label="ID">{pokemon.id}</td>
+                    <td data-label="Name">{pokemon.name}</td>
+                    <td data-label="Types">
                       {pokemon.types &&
                         pokemon.types.map((typeInfo, index) => (
                           <span key={index}>
@@ -65,7 +83,8 @@ class Question extends Component {
                   </tr>
                 </tbody>
               </table>
-            </div>
+              </div>
+              <button onClick={this.handleAnswer} disabled={!selectedAnswer}>Suivant</button>
           </>
         ) : error ? (
           <p>{error.message}</p>
