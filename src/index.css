@@ -337,3 +337,10 @@ justify-content: flex-start;}
 .recap-questions{text-align: left;}
 
 .recap-questions li{font-size: 14px;}
+
+.recap-questions img{max-width: 80px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+padding: 0;}
