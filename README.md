@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Getting Started with the Poke API app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Feeling Poke-knowledgeable ? Test your skills with the Poke API app!
+
+#### A gap in your knowedge ?
+
+A Pokedex storing all the pokemons up to the lastest game will help you getting reacquainted with Japan's finest work of art !
+
+#### Feeling up for a challenge ?
+
+Choose the Quizz to test your self on whether you will recognise these creatures on the spot !
+
+=======
+
+Clone the repo and you are good to go (no need for an API public key).
+
+**This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).**
 
 ## Available Scripts
 
