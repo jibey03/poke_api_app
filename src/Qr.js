@@ -78,7 +78,7 @@ class Quizz extends Component {
         )}
         {gameStarted && questionsAnswered < numberOfQuestions && (
           <>
-          <p>Question {questionsAnswered + 1} sur {numberOfQuestions}</p>
+          <h3>Question {questionsAnswered + 1} sur {numberOfQuestions}</h3>
             <Question pokeIds={currentPokeIds} updateScore={this.updateScore} nextQuestion={this.nextQuestion} handleAnswer={this.handleAnswer} selectedAnswer={selectedAnswer}/>
             <Reponse pokeIds={currentPokeIds} selectAnswer={this.selectAnswer}/>
           </>
